@@ -24,4 +24,8 @@ export class CertificateRequestService {
   public approveCertificateRequest(body): Observable<any> {
     return this.http.post(`${this.baseUrl}certificate-requests/approve`, body);
   }
+
+  public getPossibleExtensions(body): Observable<any> {
+    return this.http.post(`${this.baseUrl}certificate-requests/possible-extensions`, body);
+  }
 }
