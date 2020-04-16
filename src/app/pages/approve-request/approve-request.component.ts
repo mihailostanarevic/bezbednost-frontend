@@ -25,10 +25,10 @@ export class ApproveRequestComponent implements OnInit {
   public isVisible3 = false;
   public isVisible4 = false;
 
-  public checked1 = true;
-  public checked2 = true;
-  public checked3 = true;
-  public checked4 = true;
+  public checked1 = false;
+  public checked2 = false;
+  public checked3 = false;
+  public checked4 = false;
   
   constructor(private message: NzMessageService, private crqService: CertificateRequestService, private crService: CertificateService, private fb: FormBuilder, private router: Router) { }
 
