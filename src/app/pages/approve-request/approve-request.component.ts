@@ -19,6 +19,16 @@ export class ApproveRequestComponent implements OnInit {
   public issuerEndDate: String = 'nesto';
   public validateForm: FormGroup;
   public data: any;
+
+  public isVisible1 = false;
+  public isVisible2 = false;
+  public isVisible3 = false;
+  public isVisible4 = false;
+
+  public checked1 = true;
+  public checked2 = true;
+  public checked3 = true;
+  public checked4 = true;
   
   constructor(private message: NzMessageService, private crqService: CertificateRequestService, private crService: CertificateService, private fb: FormBuilder, private router: Router) { }
 
@@ -60,6 +70,26 @@ export class ApproveRequestComponent implements OnInit {
     return name + " " + lastName;
   }
 
+  public addAnotherExtensions(): void {
+    const body = {
+      email: this.selectedIssuer
+    }
+    this.crqService.getPossibleExtensions(body).subscribe(data => {
+      if(data.digitalSignature){
+        this.isVisible1 = true;
+      }
+      if(data.keyAgreement){
+        this.isVisible2 = true;
+      }
+      if(data.nonRepudiation){
+        this.isVisible3 = true;
+      }
+      if(data.keyEncipherment){
+        this.isVisible4 = true;
+      }
+    })
+  }
+
   public finish(): void {
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
@@ -74,7 +104,11 @@ export class ApproveRequestComponent implements OnInit {
         ...this.data,
         certificateAuthority: this.data.caOrEnd == 'End user' ? false : true,
         issuerEmail: this.selectedIssuer,
-        endDate: date
+        endDate: date,
+        digitalSignature: this.checked1,
+        keyAgreement: this.checked2,
+        nonRepudiation: this.checked3,
+        keyEncipherment: this.checked4
       }
       delete(body.id);
       delete(body.caOrEnd);

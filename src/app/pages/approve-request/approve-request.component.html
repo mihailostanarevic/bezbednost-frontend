@@ -35,6 +35,19 @@
       <br/>
       <br/>
   
+      <button (click)="addAnotherExtensions()" nz-button nzType="primary" [disabled]="!validateForm.valid">Add another extensions</button>
+      <br/>
+      <br/>
+      <label nz-checkbox *ngIf="isVisible1" [(ngModel)]="checked1">Digital signature</label>
+      <br/>
+      <label nz-checkbox *ngIf="isVisible2" [(ngModel)]="checked2">Key agreement</label>
+      <br/>
+      <label nz-checkbox *ngIf="isVisible3" [(ngModel)]="checked3">Non-repudiation</label>
+      <br/>
+      <label nz-checkbox *ngIf="isVisible4" [(ngModel)]="checked4">Key enchiperment</label>
+      <br/>
+      <br/>
+  
       <button (click)="finish()" nz-button nzType="primary" [disabled]="!validateForm.valid">Finish</button>
       <br/>
     </div>
